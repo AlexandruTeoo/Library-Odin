@@ -141,20 +141,55 @@ modalOverlay.addEventListener("click", (e) => {
 modal.addEventListener("submit", (e) => {
     e.preventDefault();
 
+    titleInput.setCustomValidity("");
+    authorInput.setCustomValidity("");
+    pagesInput.setCustomValidity("");
+
+    if (titleInput.value.trim() === "") {
+        titleInput.setCustomValidity("The title field must be filled!");
+    }
+
+    if (authorInput.value.trim() === "") {
+        authorInput.setCustomValidity("The author field must be filled!");
+    }
+
+    if (pagesInput.value.trim() === "") {
+        pagesInput.setCustomValidity("The pages field must be filled!");
+    } else if (Number(pagesInput.value) <= 0) {
+        pagesInput.setCustomValidity("Pages must be a positive number!");
+    }
+
+    if (!modal.checkValidity()){
+        modal.reportValidity();
+        return;
+    }
+
     const title = titleInput.value.trim();
     const author = authorInput.value.trim();
     const pages = pagesInput.value.trim();
 
-    if (title === "" || author === "" || pages === "") {
-        alert("Please fill in all fields");
-        return
-    }
-
     myLibrary.addBookToLibrary(new Book(title, author, Number(pages)));
-
     myLibrary.renderLibrary();
 
     modal.reset();
     modalOverlay.classList.remove("active");
-    document.body.style.overflow = "";
 });
+
+titleInput.addEventListener("input", () => {
+    if (titleInput.value.trim() !== "") {
+        titleInput.setCustomValidity("");
+    }
+});
+
+authorInput.addEventListener("input", () => {
+    if (authorInput.value.trim() !== "") {
+        authorInput.setCustomValidity("");
+    }
+});
+
+pagesInput.addEventListener("input", () => {
+    if (pagesInput.value.trim() !== "" && Number(pagesInput.value) > 0) {
+        pagesInput.setCustomValidity("");
+    }
+});
+
