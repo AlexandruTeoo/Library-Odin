@@ -6,8 +6,38 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Library</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>Library</div>
+    <div class = "header">
+        <h2 class = "title">Library</h2>
+        <button class = "btn" id = "addBookBtn">Add Book</button>
+    </div>
+    <div class = "library"></div>
+    <div class="modal-overlay" id="modalOverlay">
+        <form id="modal">
+            <h2>Add new book</h2>
+            <label>
+                Title
+                <input type="text" id="title">
+            </label>
+
+            <label>
+                Author
+                <input type="text" id="author">
+            </label>
+
+            <label>
+                Pages
+                <input type="number" id="pages">
+            </label>
+
+            <div class="modal-buttons">
+                <button type = "button" id="closeModal">Cancel</button>
+                <button type = "submit" id="saveBook">Save</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
